@@ -1,3 +1,4 @@
+//勤怠データのデータベース操作を行うクラス
 package com.example.attendance.dao;
 
 import java.time.LocalDate;
