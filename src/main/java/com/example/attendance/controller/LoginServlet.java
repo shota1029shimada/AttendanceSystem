@@ -1,4 +1,5 @@
 //p62~68
+
 //ユーザーのログイン処理を担当するServlet
 package com.example.attendance.controller;
 
@@ -17,7 +18,6 @@ import jakarta.servlet.http.HttpSession;
 import com.example.attendance.dao.AttendanceDAO;
 import com.example.attendance.dao.UserDAO;
 import com.example.attendance.dto.User;
-
 
 public class LoginServlet extends HttpServlet {
 	//ユーザー情報を扱うDAO

@@ -1,4 +1,5 @@
 //p69~71
+
 //ユーザーのログアウト処理を担当するServlet
 package com.example.attendance.controller;
 

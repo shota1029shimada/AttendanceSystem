@@ -1,5 +1,7 @@
 // p33~39
-//ユーザーデータのデータベース操作を行うクラス
+
+//ユーザーの認証処理（ID・パスワードチェック
+//ユーザーの追加・削除・一覧取得など
 package com.example.attendance.dao;
 
 import java.security.MessageDigest;
