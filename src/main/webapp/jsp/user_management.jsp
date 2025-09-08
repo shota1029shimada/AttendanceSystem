@@ -1,5 +1,6 @@
 <%-- p100~109 --%>
-    
+<%--ユーザー管理に関連する機能を提供するウェブページ --%>
+
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -13,25 +14,31 @@
     <div class="container">
         <h1>ユーザー管理</h1>
         <p>ようこそ, ${user.username}さん (管理者)</p>
+        
+        <!-- メインナビゲーション -->
         <div class="main-nav">
             <a href="attendance?action=filter">勤怠履歴管理</a>
-            <a href="user">ユーザー管理</a>
-            <a href="logout">ログアウト</a>
+            <a href="user">ユーザー管理</a>    <!-- user_manegement.jsp -->
+            <a href="logout">ログアウト</a>   
         </div>
+
+        <!-- セッションからの成功メッセージを表示 -->
         <c:if test="${not empty sessionScope.successMessage}">
             <p class="success-message"><c:out value="${sessionScope.successMessage}"/></p>
-            <c:remove var="successMessage" scope="session"/>
+            <c:remove var="successMessage" scope="session"/> <!-- メッセージをセッションから削除 -->
         </c:if>
+
         <h2>ユーザー追加/編集</h2>
+        <!-- ユーザー追加・編集用フォーム -->
         <form action="users" method="post" class="user-form">
             <input type="hidden" name="action" value="<c:choose><c:when test="${userToEdit != null}">update</c:when><c:otherwise>add</c:otherwise></c:choose>">
             <c:if test="${userToEdit != null}">
-                <input type="hidden" name="username" value="${userToEdit.username}">
+                <input type="hidden" name="username" value="${userToEdit.username}"> <!-- 編集時のユーザー名を隠しフィールドで送信 -->
             </c:if>
             <label for="username">ユーザーID:</label>
             <input type="text" id="username" name="username" value="<c:out value="${userToEdit.username}"/>" <c:if test="${userToEdit != null}">readonly</c:if> required>
             <label for="password">パスワード:</label>
-            <input type="password" id="password" name="password" <c:if test="${userToEdit == null}">required</c:if>>
+            <input type="password" id="password" name="password" <c:if test="${userToEdit == null}">required</c:if>> <!-- 新規ユーザーの場合は必須 -->
             <c:if test="${userToEdit != null}">
                 <p class="error-message">※編集時はパスワードは変更されません。リセットする場合は別途操作してください。</p>
             </c:if>
@@ -42,11 +49,12 @@
             </select>
             <p>
                 <label for="enabled">アカウント有効:</label>
-                <input type="checkbox" id="enabled" name="enabled" value="true" <c:if test="${userToEdit == null || userToEdit.enabled}">checked</c:if>>
+                <input type="checkbox" id="enabled" name="enabled" value="true" <c:if test="${userToEdit == null || userToEdit.enabled}">checked</c:if>> <!-- 有効状態を反映 -->
             </p>
             <div class="button-group">
                 <input type="submit" value="<c:choose><c:when test="${userToEdit != null}">更新</c:when><c:otherwise>追加</c:otherwise></c:choose>">
                 <c:if test="${userToEdit != null}">
+                    <!-- パスワードリセット用のフォーム -->
                     <form action="users" method="post" style="display:inline;">
                         <input type="hidden" name="action" value="reset_password">
                         <input type="hidden" name="username" value="${userToEdit.username}">
@@ -56,8 +64,12 @@
                 </c:if>
             </div>
         </form>
+
+        <!-- エラーメッセージの表示 -->
         <p class="error-message"><c:out value="${errorMessage}"/></p>
+
         <h2>既存ユーザー</h2>
+        <!-- 既存ユーザーの一覧表示 -->
         <table>
             <thead>
                 <tr>
@@ -73,6 +85,7 @@
                         <td>${u.username}</td>
                         <td>${u.role}</td>
                         <td>
+                            <!-- アカウントの有効・無効を切り替えるフォーム -->
                             <form action="users" method="post" style="display:inline;">
                                 <input type="hidden" name="action" value="toggle_enabled">
                                 <input type="hidden" name="username" value="${u.username}">
@@ -81,7 +94,9 @@
                             </form>
                         </td>
                         <td class="table-actions">
+                            <!-- ユーザー編集へのリンク -->
                             <a href="users?action=edit&username=${u.username}" class="button">編集</a>
+                            <!-- ユーザー削除のフォーム -->
                             <form action="users" method="post" style="display:inline;">
                                 <input type="hidden" name="action" value="delete">
                                 <input type="hidden" name="username" value="${u.username}">
@@ -91,7 +106,7 @@
                     </tr>
                 </c:forEach>
                 <c:if test="${empty users}">
-                    <tr><td colspan="4">ユーザーがいません。</td></tr>
+                    <tr><td colspan="4">ユーザーがいません。</td></tr> <!-- ユーザーがいない場合のメッセージ -->
                 </c:if>
             </tbody>
         </table>

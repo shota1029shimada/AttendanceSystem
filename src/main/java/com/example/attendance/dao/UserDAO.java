@@ -1,6 +1,6 @@
 // p33~39
 
-//ユーザーの認証処理（ID・パスワードチェック
+//ユーザーの認証処理（ID・パスワードチェック)z
 //ユーザーの追加・削除・一覧取得など
 package com.example.attendance.dao;
 
@@ -18,9 +18,9 @@ public class UserDAO {
 
     static {
         // 初期ユーザーをマップに追加
-        users.put("employee1", new User("employee1", hashPassword("password"), "employee", true));
-        users.put("admin1", new User("admin1", hashPassword("adminpass"), "admin", true));
-        users.put("employee2", new User("employee2", hashPassword("password"), "employee", true));
+        users.put("employee1", new User("employee1", hashPassword("password"), "employee", true)); //従業員
+        users.put("admin1", new User("admin1", hashPassword("adminpass"), "admin", true));         //管理者
+        users.put("employee2", new User("employee2", hashPassword("password"), "employee", true)); //従業員
     }
 
     // ユーザー名でユーザーを検索するメソッド

@@ -1,5 +1,5 @@
  <%--p114~117 --%>
- <%--エラーメッセージを表示するためのJSPファイル --%>
+ <%--エラーメッセージを表示--%>
 <%@ page contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     isErrorPage="true" %>
