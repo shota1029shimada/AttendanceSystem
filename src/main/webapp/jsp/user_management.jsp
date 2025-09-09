@@ -30,10 +30,13 @@
 
         <h2>ユーザー追加/編集</h2>
         <!-- ユーザー追加・編集用フォーム -->
-        <form action="users" method="post" class="user-form">
-            <input type="hidden" name="action" value="<c:choose><c:when test="${userToEdit != null}">update</c:when><c:otherwise>add</c:otherwise></c:choose>">
-            <c:if test="${userToEdit != null}">
-                <input type="hidden" name="username" value="${userToEdit.username}"> <!-- 編集時のユーザー名を隠しフィールドで送信 -->
+      <form action="${pageContext.request.contextPath}/user" method="post" class="user-form">
+      <input type="hidden" name="action" value="<c:choose><c:when test="${userToEdit != null}">update</c:when><c:otherwise>add</c:otherwise></c:choose>">
+      <c:if test="${userToEdit != null}"> 
+            
+            
+            <!-- 編集時のユーザー名を隠しフィールドで送信 -->
+                <input type="hidden" name="username" value="${userToEdit.username}"> 
             </c:if>
             <label for="username">ユーザーID:</label>
             <input type="text" id="username" name="username" value="<c:out value="${userToEdit.username}"/>" <c:if test="${userToEdit != null}">readonly</c:if> required>
@@ -95,9 +98,10 @@
                         </td>
                         <td class="table-actions">
                             <!-- ユーザー編集へのリンク -->
-                            <a href="users?action=edit&username=${u.username}" class="button">編集</a>
+                            <!-- <a href="users?action=edit&username=${u.username}" class="button">編集</a>  ⬇に変更️-->
+                            <a href="${pageContext.request.contextPath}/user?action=edit&username=${u.username}" class="button">編集</a>
                             <!-- ユーザー削除のフォーム -->
-                            <form action="users" method="post" style="display:inline;">
+                            <form action="user" method="post" style="display:inline;">
                                 <input type="hidden" name="action" value="delete">
                                 <input type="hidden" name="username" value="${u.username}">
                                 <input type="submit" value="削除" class="button danger" onclick="return confirm('本当にこのユーザーを削除しますか？');">
