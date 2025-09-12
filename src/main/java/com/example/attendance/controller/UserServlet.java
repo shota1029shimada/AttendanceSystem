@@ -1,4 +1,4 @@
-//p72~81
+//p72~8
 //ユーザー情報の管理や表示を担当するServlet
 package com.example.attendance.controller;
 
