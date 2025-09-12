@@ -3,6 +3,7 @@
 <%@ page contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     isErrorPage="true" %>
+<link rel="stylesheet" href="style.css">
     
 <!DOCTYPE html>
 <html lang="ja">
